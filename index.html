@@ -15,6 +15,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
+
     <script>
 
     function component_to_hex(c) {
@@ -141,6 +143,21 @@
         justify-items: center;
         overflow: hidden;
       }
+      .material-symbols-outlined {
+        width: max-content;
+        height: max-content;
+      }
+      #settings_button {
+        display: flex;
+        background: black;
+        border-radius: 10px;
+        color: white;
+
+        padding: 3px;
+        width: max-content;
+        margin-top: 3px;
+        margin-left: 3px;
+      }
       table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
@@ -151,10 +168,14 @@
     </style>
   </head>
   <body>
-    <div>
-        <input type="color" id="color1_input">
-        <input type="color" id="color2_input">
+
+    <div id="settings_button">
+      <span class="material-symbols-outlined">
+      settings
+      </span>
+      <h3 style="margin: 0px;" >Settings</h3>
     </div>
+
     <div id="main_holder">
       <div id="header">
         <!-- <img src="/tickets.svg" alt="TicketBoost_logo" style="width: 60px" /> -->
@@ -177,7 +198,7 @@
       <div id="test" style="background: red;">
         <h1>test</h1>
       </div>
-      
+
     </div>
     <!-- <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p> -->
   </body>
