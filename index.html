@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>TicketBoost</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aldrich&family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+
+    function component_to_hex(c) {
+    const hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    function rgb_to_hex(r, g, b) {
+    return "#" + component_to_hex(r) + component_to_hex(g) + component_to_hex(b);
+    }
+
+    function rgb_str_to_hex(string) {
+    let srtrings = string.replaceAll(" ", "").split(",");
+    let r = parseInt(srtrings[0]);
+    let g = parseInt(srtrings[1]);
+    let b = parseInt(srtrings[2]);
+    return rgb_to_hex(r,g,b);
+    }
+
+    function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+    }
+
+    defalut_colors = ["255, 188, 0", "255, 0, 235"]
+
+    for (let i = 1; i < 3; i++) {
+        let stored_color = localStorage.getItem(`color${i}`);
+        if (stored_color != undefined){
+            let colors = hexToRgb(stored_color);
+            document.documentElement.style.setProperty(`--color${i}`, `${colors.r}, ${colors.g}, ${colors.b}`);
+        } else {
+            document.documentElement.style.setProperty(`--color${i}`, defalut_colors[i-1]);
+        }
+    }
+    </script>
+
+    <style>
+      html {
+        font-family: "Orbitron", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+      }
+      body,
+      html {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(127deg, rgb(var(--color1)), rgb(var(--color2)));
+      }
+      #main_holder {
+        background: #ffffff4b;
+        width: 80%;
+        height: 90%;
+        position: fixed;
+        inset: 0px;
+        margin: auto;
+        border-radius: 35px;
+      }
+      #header {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        background: #ffffff54;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+
+      }
+      button {
+        cursor: pointer;
+        font-family: inherit;
+        font-optical-sizing: inherit;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: inherit;
+        border-radius: 0px;
+        /* border: 1px black solid; */
+        border: none;
+        color: white;
+      }
+      
+
+      #sub_header {
+        display: grid;
+        grid-template-columns: auto auto;
+        height: 4%;
+        font-size: large;
+      }
+      #event_selector_button {
+        display: grid;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        background: #ffffffe6;
+        /* backdrop-filter: invert(1); */
+        /* color: white; */
+      }
+      .even_select_buttons {
+        background: lightcyan;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 12px;
+        width: max-content;
+
+        border-radius: 12px;
+        width: max-content;
+        background: lightcyan;
+        min-width: max-content;
+      }
+      #type_selector_choises {
+        position: fixed;
+        left: 0px;
+        right: 0px;
+
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        overflow: hidden;
+      }
+      table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      td {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+        <input type="color" id="color1_input">
+        <input type="color" id="color2_input">
+    </div>
+    <div id="main_holder">
+      <div id="header">
+        <!-- <img src="/tickets.svg" alt="TicketBoost_logo" style="width: 60px" /> -->
+         <?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> <svg width="60" height="60" viewBox="0 0 20 20" version="1.1" id="svg1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1"> <linearGradient id="linearGradient1"> <stop style="stop-color:rgb(var(--color1));stop-opacity:1;" offset="0" id="stop1" /> <stop style="stop-color:rgb(var(--color2));stop-opacity:0.91580993;" offset="1" id="stop2" /> </linearGradient> <linearGradient xlink:href="#linearGradient1" id="linearGradient2" x1="0" y1="10.5" x2="20" y2="10.5" gradientUnits="userSpaceOnUse" /> </defs> <rect x="0" fill="none" width="20" height="20" id="rect1" y="0" /> <g id="g1"> <path d="M 20,6.38 18.99,9.2 V 9.19 C 18.47,9 17.96,9.03 17.46,9.27 c -0.5,0.24 -0.85,0.62 -1.04,1.14 -0.19,0.52 -0.16,1.03 0.07,1.53 0.24,0.5 0.62,0.84 1.15,1.03 v 0.01 L 16.63,15.8 1.57,10.42 2.56,7.63 C 3.08,7.82 3.59,7.79 4.09,7.55 4.59,7.32 4.93,6.94 5.12,6.42 5.31,5.9 5.28,5.39 5.04,4.89 4.81,4.4 4.43,4.06 3.91,3.87 L 4.93,1 Z M 15.03,12.07 16.4,8.31 C 16.52,8 16.5,7.66 16.36,7.36 16.22,7.06 15.97,6.83 15.66,6.71 L 8.14,3.98 C 7.5,3.75 6.77,4.1 6.54,4.72 L 5.17,8.48 c -0.24,0.65 0.1,1.37 0.74,1.6 l 7.52,2.74 c 0.14,0.05 0.28,0.08 0.43,0.08 0.52,0 1,-0.33 1.17,-0.83 z M 7.97,4.45 15.48,7.18 c 0.19,0.07 0.34,0.21 0.43,0.39 0.08,0.18 0.09,0.38 0.02,0.57 l -1.37,3.76 c -0.13,0.38 -0.58,0.59 -0.96,0.45 L 6.09,9.61 C 5.7,9.47 5.5,9.04 5.64,8.65 L 7.01,4.89 C 7.11,4.6 7.4,4.4 7.71,4.4 7.8,4.4 7.88,4.42 7.97,4.45 Z m 6.82,12.14 c 0.35,0.27 0.75,0.41 1.2,0.41 H 16 v 3 H 0 v -2.96 c 0.55,0 1.03,-0.2 1.41,-0.59 C 1.8,16.07 2,15.59 2,15.04 2,14.49 1.8,14.02 1.41,13.63 1.02,13.24 0.55,13.04 0,13.04 V 10 h 1.05 l -0.28,0.8 2.87,1.02 C 3.13,11.98 2.75,12.44 2.75,13 v 4 c 0,0.69 0.56,1.25 1.25,1.25 h 8 c 0.69,0 1.25,-0.56 1.25,-1.25 v -1.75 l 0.83,0.3 c 0.12,0.43 0.36,0.78 0.71,1.04 z M 3.25,17 v -4 c 0,-0.41 0.34,-0.75 0.75,-0.75 h 0.83 l 7.92,2.83 V 17 c 0,0.41 -0.34,0.75 -0.75,0.75 H 4 C 3.59,17.75 3.25,17.41 3.25,17 Z" id="path1" style="fill:url(#linearGradient2)" /> </g> </svg>
+        <h2>TicketBoost</h2>
+      </div>
+      <div id="sub_header" >
+        <button id="log_in" onclick="log_in()" style="background: rgba(var(--color1), 0.4);" >Log in</button>
+        <button id="sign_up" onclick="sign_up()" style="background: rgba(var(--color2), 0.4);" >Sign up</button>
+      </div>
+      <div id="event_selector_button", style="height: 5%;">
+            <h3 style="margin: 0px; text-align: center;" >
+              Select Event Type
+            </h3>
+      </div>
+
+      <div id="type_selector_choises">
+      </div>
+
+      <div id="test" style="background: red;">
+        <h1>test</h1>
+      </div>
+      
+    </div>
+    <!-- <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p> -->
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
+
+  <script>
+
+    const { animate, stagger } = anime;
+    
+    let event_selector_open = false;
+
+    
+
+    function log_in() {
+      animate("#log_in", {
+        rotate: 360,
+        onComplete: self => {self.revert()},
+      });
+    }
+    function sign_up() {
+      animate("#sign_up", {
+        rotate: 360,
+        onComplete: self => {self.revert()},
+      });
+    }
+
+    function reset_button(){
+      $("#log_in").style.transform = "rotate(deg0)";
+    }
+
+    $("#event_selector_button").on("click", function() {
+      if (!event_selector_open){
+        animate('.even_select_buttons', {
+          keyframes: [
+            { translateY: '0%', duration: 400, delay: stagger(100, { reversed: true }), },
+            { width: '100%', duration: 400, delay: stagger(100, { reversed: false }) },
+          ],
+        });
+      } else {
+        animate('.even_select_buttons', {
+          keyframes: [
+            { width: '0%', duration: 400},
+            { translateY: '-1000%', duration: 400, delay: stagger(110, { reversed: false }), },
+          ],
+        });
+      }
+      event_selector_open = !event_selector_open;
+    });
+
+    // let event_types = ["concerts"];
+    let event_types = ["concerts", "sport events", "plays", "movies"];
+
+    // let event_types_table = document.createElement("table");
+
+    // event_types_table.style.width = "100%";
+
+    for (let event_number in event_types) {
+      let event = event_types[event_number];
+      // let table_row = document.createElement("tr");
+      // let table_cell = document.createElement("td");
+      let event_div = document.createElement("div");
+      event_div.style.cursor = "pointer";
+      event_div.textContent = event_types[event_number];
+
+      event_div.style.transform = `translateY(-1000%)`;
+      event_div.style.textAlign = `center`;
+      event_div.style.width = `0%`;
+      
+      $("#type_selector_choises").append(event_div);
+
+      event_div.classList.add("even_select_buttons");
+      // table_cell.style.cursor = "pointer";
+      // table_cell.textContent = event_types[event_number];
+      // table_row.append(table_cell);
+      // event_types_table.append(table_row);
+    }
+
+    
+
+    document.getElementById("color1_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color1"))}`;
+    document.getElementById("color2_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color2"))}`;
+    
+    for (let i = 1; i < 3; i++) {
+        document.getElementById(`color${i}_input`).addEventListener("input", function(e) {
+            let colors = hexToRgb(document.getElementById(`color${i}_input`).value);
+            document.documentElement.style.setProperty(`--color${i}`, `${colors.r}, ${colors.g}, ${colors.b}`);
+        });
+        document.getElementById(`color${i}_input`).addEventListener("change", function(e) {
+            localStorage.setItem(`color${i}`, document.getElementById(`color${i}_input`).value);
+        });
+    }
+    
+  </script>
+</html>
