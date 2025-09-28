@@ -12,7 +12,9 @@
       href="https://fonts.googleapis.com/css2?family=Aldrich&family=Orbitron:wght@400..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=login,settings" />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=login,distance" /> -->
+     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=distance,settings,login" /> -->
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <script>
@@ -61,163 +63,8 @@
 
     </script>
 
-    <style>
-      html {
-        font-family: "Orbitron", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 600;
-        font-style: normal;
-      }
-      body,
-      html {
-        margin: 0px;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background: linear-gradient(127deg, rgb(var(--color1)), rgb(var(--color2)));
-      }
-      #main_holder {
-        background: #ffffff4b;
-        width: 80%;
-        height: 90%;
-        position: fixed;
-        inset: 0px;
-        margin: auto;
-        border-radius: 35px;
-      }
-      #header {
-        display: grid;
-        grid-template-columns: auto auto;
-        justify-content: center;
-        background: #ffffff54;
-        border-top-left-radius: 35px;
-        border-top-right-radius: 35px;
+    <link rel="stylesheet" href="styles.css">
 
-      }
-      button {
-        cursor: pointer;
-        font-family: inherit;
-        font-optical-sizing: inherit;
-        font-weight: inherit;
-        font-style: inherit;
-        font-size: inherit;
-        border-radius: 0px;
-        /* border: 1px black solid; */
-        border: none;
-        color: white;
-      }
-      
-
-      #sub_header {
-        display: grid;
-        grid-template-columns: auto auto;
-        height: 4%;
-        font-size: large;
-      }
-      #event_selector_button {
-        display: grid;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        background: #ffffffe6;
-        /* backdrop-filter: invert(1); */
-        /* color: white; */
-      }
-      .even_select_buttons {
-        margin: 5px;
-        padding: 5px;
-
-        border-radius: 12px;
-        background: lightcyan;
-        min-width: max-content;
-
-        pointer-events: all;
-      }
-      #type_selector_choises {
-        position: fixed;
-        left: 0px;
-        right: 0px;
-
-        /* width: max-content;
-        padding: 5px;
-        margin: auto; */
-
-        display: grid;
-        align-items: center;
-        justify-content: center;
-        justify-items: center;
-        overflow: hidden;
-
-        pointer-events: none;
-      }
-      .material-symbols-outlined {
-        width: max-content;
-        height: max-content;
-      }
-      .top_button {
-        position: absolute;
-        display: flex;
-        background: black;
-        border-radius: 10px;
-        color: white;
-
-        padding: 3px;
-        justify-content: center;
-        margin: 3px;
-        cursor: pointer;
-        user-select: none;
-
-        max-width: -webkit-fill-available;
-        max-width: -moz-available;
-        width: 30%;
-      }
-      #sections_holder{
-        overflow: hidden; 
-        height: inherit;
-        display: grid;
-      }
-      .section {
-        /* position: fixed; */
-        width: inherit;
-        grid-column: 1;
-        grid-row: 1;
-      }
-      table, th, td {
-        border-collapse: collapse;
-
-        min-width: 100px;
-        min-height: 130px;
-        font-size: large;
-      }
-      th, td, tr {
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
-
-        border-left: none;
-        border-right: none;
-      }
-      td {
-        text-align: center;
-      }
-      #log_in_form {
-        background: #0000002b;
-        border-radius: 12px;
-        width: max-content;
-        padding: 10px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0px 0px 13px 1px #3f3f3f;
-        color: white;
-      }
-      #submit_button {
-        background: #0000002b;
-        width: 100%;
-        padding: 5px;
-        border-radius: 12px;
-        font-size: larger;
-        box-shadow: 0px 0px 13px 1px #3f3f3f;
-      }
-    </style>
   </head>
   <body>
 
@@ -245,16 +92,37 @@
       </div>
       
       <div id="sections_holder" >
+
         <div id="home" class="section" >
           <div id="event_selector_button", style="height: 40px;">
-                <h3 id="event_type_label" style="margin: 0px; text-align: center;" >
-                  Select Event Type
-                </h3>
+            <h3 id="event_type_label" style="margin: 0px; text-align: center;" >
+              Select Event Type
+            </h3>
           </div>
           <div id="type_selector_choises">
           </div>
+
+          <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly;" >
+            <!-- <div class="card" >
+              <div>
+                <img src="https://picsum.photos/800/800" style="width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;" alt="">
+              </div>
+              <h2 style="text-align: center;" >Test name</h2>
+              <hr>
+                <div style="display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;" >
+                  <span class="material-symbols-outlined" >calendar_clock</span>
+                  <h3 style="width: max-content;" > Test date</h2>
+                </div>
+                <div style="display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;" >
+                  <span class="material-symbols-outlined" >distance</span>
+                  <h3 style="width: max-content;" > Test location</h2>
+                </div>
+            </div> -->
+          </div>
+
         </div>
-  
+
+
         <div id="settings" class="section" style="transform: translateX(-101%);" >
           <table style="width: 100%;" >
             <tbody>
@@ -291,13 +159,6 @@
             </div>
             <button id="submit_button" onclick="spin_button()" >Log in</button>
           </div>
-
-          <!-- <div style="display: grid; justify-items: center; height: 5%;" >
-          </div> -->
-          <!-- <div id="sub_header" >
-            <button id="log_in" onclick="log_in()" style="background: rgba(var(--color1), 0.4);" >Log in</button>
-            <button id="sign_up" onclick="sign_up()" style="background: rgba(var(--color2), 0.4);" >Sign up</button>
-          </div> -->
         </div>
       </div>
 
@@ -330,6 +191,62 @@
       set_defalut_colors();
       reset_color_inputs();
     }
+
+    let card_label_style = "display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;";
+
+    function add_cards() {
+      let card = document.createElement("div");
+      card.classList.add("card");
+
+      let image = document.createElement("img");
+      let seed = String(Math.round(Math.random()*100));
+      let source = `https://picsum.photos/seed/${seed}/800/800`;
+      console.log(source);
+      image.src = source;
+      image.style = "width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;";
+
+      let name_label = document.createElement("h1");
+      name_label.textContent = "Test name";
+      name_label.style = "text-align: center;";
+
+      let date_label = document.createElement("div");
+      date_label.style = card_label_style;
+
+        let data_label_icon = document.createElement("span");
+        data_label_icon.classList.add("material-symbols-outlined");
+        data_label_icon.textContent = "calendar_clock";
+      
+        let data_label_text = document.createElement("h3");
+        data_label_text.style = "width: max-content;";
+        data_label_text.textContent = "Test location";
+      
+      date_label.append(data_label_icon);
+      date_label.append(data_label_text);
+
+      let location_label = document.createElement("div");
+      location_label.style = card_label_style;
+
+        let location_label_icon = document.createElement("span");
+        location_label_icon.classList.add("material-symbols-outlined");
+        location_label_icon.textContent = "distance";
+      
+        let location_label_text = document.createElement("h3");
+        location_label_text.style = "width: max-content;";
+        location_label_text.textContent = "Test location";
+      
+      location_label.append(location_label_icon);
+      location_label.append(location_label_text);
+
+      card.append(image);
+      card.append(name_label);
+      card.append(date_label);
+      card.append(location_label);
+
+      $("#cards_holder").append(card);
+
+    }
+
+    
 
     
 
@@ -424,6 +341,9 @@
       event_div.addEventListener("click", function(e) {
         text_change(event_types[event_number]);
         toggle_event_selector();
+        add_cards();
+        add_cards();
+        add_cards();
       });
       
       $("#type_selector_choises").append(event_div);
