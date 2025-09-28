@@ -12,10 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Aldrich&family=Orbitron:wght@400..900&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=login,settings" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings" />
 
     <script>
 
@@ -47,15 +45,20 @@
 
     defalut_colors = ["255, 188, 0", "255, 0, 235"]
 
-    for (let i = 1; i < 3; i++) {
-        let stored_color = localStorage.getItem(`color${i}`);
-        if (stored_color != undefined){
-            let colors = hexToRgb(stored_color);
-            document.documentElement.style.setProperty(`--color${i}`, `${colors.r}, ${colors.g}, ${colors.b}`);
-        } else {
-            document.documentElement.style.setProperty(`--color${i}`, defalut_colors[i-1]);
-        }
+    function set_defalut_colors() {
+      for (let i = 1; i <= 2; i++) {
+          let stored_color = localStorage.getItem(`color${i}`);
+          if (stored_color != undefined){
+              let colors = hexToRgb(stored_color);
+              document.documentElement.style.setProperty(`--color${i}`, `${colors.r}, ${colors.g}, ${colors.b}`);
+          } else {
+              document.documentElement.style.setProperty(`--color${i}`, defalut_colors[i-1]);
+          }
+      }
     }
+
+    set_defalut_colors();
+
     </script>
 
     <style>
@@ -121,60 +124,118 @@
         /* color: white; */
       }
       .even_select_buttons {
-        background: lightcyan;
         margin: 5px;
         padding: 5px;
-        border-radius: 12px;
-        width: max-content;
 
         border-radius: 12px;
-        width: max-content;
         background: lightcyan;
         min-width: max-content;
+
+        pointer-events: all;
       }
       #type_selector_choises {
         position: fixed;
         left: 0px;
         right: 0px;
 
+        /* width: max-content;
+        padding: 5px;
+        margin: auto; */
+
         display: grid;
         align-items: center;
         justify-content: center;
         justify-items: center;
         overflow: hidden;
+
+        pointer-events: none;
       }
       .material-symbols-outlined {
         width: max-content;
         height: max-content;
       }
-      #settings_button {
+      .top_button {
+        position: absolute;
         display: flex;
         background: black;
         border-radius: 10px;
         color: white;
 
         padding: 3px;
-        width: max-content;
-        margin-top: 3px;
-        margin-left: 3px;
+        justify-content: center;
+        margin: 3px;
+        cursor: pointer;
+        user-select: none;
+
+        max-width: -webkit-fill-available;
+        max-width: -moz-available;
+        width: 30%;
+      }
+      #sections_holder{
+        overflow: hidden; 
+        height: inherit;
+        display: grid;
+      }
+      .section {
+        /* position: fixed; */
+        width: inherit;
+        grid-column: 1;
+        grid-row: 1;
       }
       table, th, td {
-        border: 1px solid black;
         border-collapse: collapse;
+
+        min-width: 100px;
+        min-height: 130px;
+        font-size: large;
+      }
+      th, td, tr {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+
+        border-left: none;
+        border-right: none;
       }
       td {
         text-align: center;
+      }
+      #log_in_form {
+        background: #0000002b;
+        border-radius: 12px;
+        width: max-content;
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 13px 1px #3f3f3f;
+        color: white;
+      }
+      #submit_button {
+        background: #0000002b;
+        width: 100%;
+        padding: 5px;
+        border-radius: 12px;
+        font-size: larger;
+        box-shadow: 0px 0px 13px 1px #3f3f3f;
       }
     </style>
   </head>
   <body>
 
-    <div id="settings_button">
+      <div onclick="settings()" id="settings_button" class="top_button" >
       <span class="material-symbols-outlined">
       settings
       </span>
       <h3 style="margin: 0px;" >Settings</h3>
     </div>
+
+    <div onclick="log_in()" id="log_in_button" class="top_button" style="right: 3px;">
+      <span class="material-symbols-outlined">
+      login
+      </span>
+      <h3 style="margin: 0px;" >Log in</h3>
+    </div>
+
+    
 
     <div id="main_holder">
       <div id="header">
@@ -182,22 +243,66 @@
          <?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> <svg width="60" height="60" viewBox="0 0 20 20" version="1.1" id="svg1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> <defs id="defs1"> <linearGradient id="linearGradient1"> <stop style="stop-color:rgb(var(--color1));stop-opacity:1;" offset="0" id="stop1" /> <stop style="stop-color:rgb(var(--color2));stop-opacity:0.91580993;" offset="1" id="stop2" /> </linearGradient> <linearGradient xlink:href="#linearGradient1" id="linearGradient2" x1="0" y1="10.5" x2="20" y2="10.5" gradientUnits="userSpaceOnUse" /> </defs> <rect x="0" fill="none" width="20" height="20" id="rect1" y="0" /> <g id="g1"> <path d="M 20,6.38 18.99,9.2 V 9.19 C 18.47,9 17.96,9.03 17.46,9.27 c -0.5,0.24 -0.85,0.62 -1.04,1.14 -0.19,0.52 -0.16,1.03 0.07,1.53 0.24,0.5 0.62,0.84 1.15,1.03 v 0.01 L 16.63,15.8 1.57,10.42 2.56,7.63 C 3.08,7.82 3.59,7.79 4.09,7.55 4.59,7.32 4.93,6.94 5.12,6.42 5.31,5.9 5.28,5.39 5.04,4.89 4.81,4.4 4.43,4.06 3.91,3.87 L 4.93,1 Z M 15.03,12.07 16.4,8.31 C 16.52,8 16.5,7.66 16.36,7.36 16.22,7.06 15.97,6.83 15.66,6.71 L 8.14,3.98 C 7.5,3.75 6.77,4.1 6.54,4.72 L 5.17,8.48 c -0.24,0.65 0.1,1.37 0.74,1.6 l 7.52,2.74 c 0.14,0.05 0.28,0.08 0.43,0.08 0.52,0 1,-0.33 1.17,-0.83 z M 7.97,4.45 15.48,7.18 c 0.19,0.07 0.34,0.21 0.43,0.39 0.08,0.18 0.09,0.38 0.02,0.57 l -1.37,3.76 c -0.13,0.38 -0.58,0.59 -0.96,0.45 L 6.09,9.61 C 5.7,9.47 5.5,9.04 5.64,8.65 L 7.01,4.89 C 7.11,4.6 7.4,4.4 7.71,4.4 7.8,4.4 7.88,4.42 7.97,4.45 Z m 6.82,12.14 c 0.35,0.27 0.75,0.41 1.2,0.41 H 16 v 3 H 0 v -2.96 c 0.55,0 1.03,-0.2 1.41,-0.59 C 1.8,16.07 2,15.59 2,15.04 2,14.49 1.8,14.02 1.41,13.63 1.02,13.24 0.55,13.04 0,13.04 V 10 h 1.05 l -0.28,0.8 2.87,1.02 C 3.13,11.98 2.75,12.44 2.75,13 v 4 c 0,0.69 0.56,1.25 1.25,1.25 h 8 c 0.69,0 1.25,-0.56 1.25,-1.25 v -1.75 l 0.83,0.3 c 0.12,0.43 0.36,0.78 0.71,1.04 z M 3.25,17 v -4 c 0,-0.41 0.34,-0.75 0.75,-0.75 h 0.83 l 7.92,2.83 V 17 c 0,0.41 -0.34,0.75 -0.75,0.75 H 4 C 3.59,17.75 3.25,17.41 3.25,17 Z" id="path1" style="fill:url(#linearGradient2)" /> </g> </svg>
         <h2>TicketBoost</h2>
       </div>
-      <div id="sub_header" >
-        <button id="log_in" onclick="log_in()" style="background: rgba(var(--color1), 0.4);" >Log in</button>
-        <button id="sign_up" onclick="sign_up()" style="background: rgba(var(--color2), 0.4);" >Sign up</button>
-      </div>
-      <div id="event_selector_button", style="height: 5%;">
-            <h3 style="margin: 0px; text-align: center;" >
-              Select Event Type
-            </h3>
+      
+      <div id="sections_holder" >
+        <div id="home" class="section" >
+          <div id="event_selector_button", style="height: 40px;">
+                <h3 id="event_type_label" style="margin: 0px; text-align: center;" >
+                  Select Event Type
+                </h3>
+          </div>
+          <div id="type_selector_choises">
+          </div>
+        </div>
+  
+        <div id="settings" class="section" style="transform: translateX(-101%);" >
+          <table style="width: 100%;" >
+            <tbody>
+              <tr>
+                <td>Main color: </td>
+                <td><input type="color" id="color1_input" style="width: 100%;" ></td>
+              </tr>
+    
+               <tr>
+                <td>Secondary color: </td>
+                <td><input type="color" id="color2_input" style="width: 100%;" ></td>
+              </tr>
+
+               <tr>
+                <td>Custom colors: </td>
+                <td><button onclick="reset_colors()" style="color: black; width: 100%;" >reset</button></td>
+              </tr>
+
+               <tr>
+                <td>Save data: </td>
+                <td><button onclick="reset_memeory()" style="color: black; width: 100%;" >delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="login" class="section" style="transform: translateX(101%);">
+          <div style="display: grid; justify-content: center;" >
+            <div id="log_in_form" >
+              <h1>Email</h1>
+              <input type="text" style="font-size: large;" >
+              <h1>Password</h1>
+              <input type="password" style="font-size: large;" >
+            </div>
+            <button id="submit_button" onclick="spin_button()" >Log in</button>
+          </div>
+
+          <!-- <div style="display: grid; justify-items: center; height: 5%;" >
+          </div> -->
+          <!-- <div id="sub_header" >
+            <button id="log_in" onclick="log_in()" style="background: rgba(var(--color1), 0.4);" >Log in</button>
+            <button id="sign_up" onclick="sign_up()" style="background: rgba(var(--color2), 0.4);" >Sign up</button>
+          </div> -->
+        </div>
       </div>
 
-      <div id="type_selector_choises">
-      </div>
+      
 
-      <div id="test" style="background: red;">
-        <h1>test</h1>
-      </div>
 
     </div>
     <!-- <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p> -->
@@ -207,59 +312,108 @@
 
   <script>
 
-    const { animate, stagger } = anime;
+    const { animate, stagger, createTimeline, text } = anime;
     
     let event_selector_open = false;
+    let menu_state = "home";
+    // let menu_timeline_animation = createTimeline();
 
+    function reset_memeory() {
+      localStorage.clear();
+      reset_colors();
+    }
+
+    function reset_colors() {
+      for (let i = 1; i <= 2; i++) {
+        localStorage.removeItem(`color${i}`);
+      }
+      set_defalut_colors();
+      reset_color_inputs();
+    }
+
+    
+
+    function get_characters() {
+      return text.split('#event_type_label', {chars: { wrap: 'clip' }}).chars;
+    }
+
+    get_characters();
+
+
+    function text_change(changed_text) {
+      let characters = get_characters();
+      animate(characters, {
+        y: [
+          { to: '-100%', delay: stagger(50), ease: 'in(3)' },
+        ],
+        duration: 400,
+        onComplete: self => {
+          $("#event_type_label").text(changed_text);
+          characters = get_characters();
+
+          animate(characters, {
+            y: [
+              { to: ['100%', '0%'] },
+            ],
+            duration: 750,
+            ease: 'out(3)',
+            delay: stagger(50),
+          });
+        }
+      });
+    }
+
+    
+
+    
+
+    let switch_to_login_animation = createTimeline({autoplay: false})
+      .add("#settings_button", {translateY: "-200%", duration: 500}, 0)
+      .add("#log_in_button", {width: "100%", duration: 500}, 0)
+      .add("#home", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 500)
+      .add("#login", {translateX: "0%", ease: "inQuad"});
+    
+      
+    let switch_to_settings_animation = createTimeline({autoplay: false})
+      .add("#log_in_button", {translateY: "-200%", duration: 500}, 0)
+      .add("#settings_button", {width: "100%", duration: 500}, 0)
+      .add("#home", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 500)
+      .add("#settings", {translateX: "0%", ease: "inQuad"});
+    
     
 
     function log_in() {
-      animate("#log_in", {
-        rotate: 360,
-        onComplete: self => {self.revert()},
-      });
-    }
-    function sign_up() {
-      animate("#sign_up", {
-        rotate: 360,
-        onComplete: self => {self.revert()},
-      });
-    }
-
-    function reset_button(){
-      $("#log_in").style.transform = "rotate(deg0)";
-    }
-
-    $("#event_selector_button").on("click", function() {
-      if (!event_selector_open){
-        animate('.even_select_buttons', {
-          keyframes: [
-            { translateY: '0%', duration: 400, delay: stagger(100, { reversed: true }), },
-            { width: '100%', duration: 400, delay: stagger(100, { reversed: false }) },
-          ],
-        });
-      } else {
-        animate('.even_select_buttons', {
-          keyframes: [
-            { width: '0%', duration: 400},
-            { translateY: '-1000%', duration: 400, delay: stagger(110, { reversed: false }), },
-          ],
-        });
+      if (menu_state == "home"){
+        switch_to_login_animation.play();
+        menu_state = "login";
+      } else if (menu_state == "login"){
+        switch_to_login_animation.reverse();
+        menu_state = "home";
       }
-      event_selector_open = !event_selector_open;
-    });
+    }
+
+    function settings() {
+      if (menu_state == "home"){
+        switch_to_settings_animation.play();
+        menu_state = "settings";
+      } else if (menu_state == "settings"){
+        switch_to_settings_animation.reverse();
+        menu_state = "home";
+      }
+    }
+
+    function spin_button(){
+      animate("#submit_button", {
+        rotate: "360deg",
+        onComplete: self => self.revert(),
+      });
+    }
 
     // let event_types = ["concerts"];
     let event_types = ["concerts", "sport events", "plays", "movies"];
 
-    // let event_types_table = document.createElement("table");
-
-    // event_types_table.style.width = "100%";
-
     for (let event_number in event_types) {
       let event = event_types[event_number];
-      // let table_row = document.createElement("tr");
-      // let table_cell = document.createElement("td");
       let event_div = document.createElement("div");
       event_div.style.cursor = "pointer";
       event_div.textContent = event_types[event_number];
@@ -267,22 +421,46 @@
       event_div.style.transform = `translateY(-1000%)`;
       event_div.style.textAlign = `center`;
       event_div.style.width = `0%`;
+      event_div.addEventListener("click", function(e) {
+        text_change(event_types[event_number]);
+        toggle_event_selector();
+      });
       
       $("#type_selector_choises").append(event_div);
 
       event_div.classList.add("even_select_buttons");
-      // table_cell.style.cursor = "pointer";
-      // table_cell.textContent = event_types[event_number];
-      // table_row.append(table_cell);
-      // event_types_table.append(table_row);
     }
 
-    
+    let event_selector_animation = animate('.even_select_buttons', {
+      autoplay: false,
+      keyframes: [
+        { translateY: '0%', duration: 400, delay: stagger(100, { reversed: true }), },
+        { width: '100%', duration: 400, delay: stagger(100, { reversed: false }) },
+      ],
+    });
 
-    document.getElementById("color1_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color1"))}`;
-    document.getElementById("color2_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color2"))}`;
+    $("#event_selector_button").on("click", function() {
+      toggle_event_selector();
+    });
+
+    function toggle_event_selector() {
+      if (!event_selector_open){
+        event_selector_animation.play();
+      } else {
+        event_selector_animation.reverse();
+      }
+      event_selector_open = !event_selector_open;
+    }
+
+    function reset_color_inputs() {
+      document.getElementById("color1_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color1"))}`;
+      document.getElementById("color2_input").value = `${rgb_str_to_hex(document.documentElement.style.getPropertyValue("--color2"))}`;
+    }
+
+    reset_color_inputs();
+
     
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i <= 2; i++) {
         document.getElementById(`color${i}_input`).addEventListener("input", function(e) {
             let colors = hexToRgb(document.getElementById(`color${i}_input`).value);
             document.documentElement.style.setProperty(`--color${i}`, `${colors.r}, ${colors.g}, ${colors.b}`);
