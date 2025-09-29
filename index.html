@@ -82,7 +82,6 @@
       <h3 style="margin: 0px;" >Log in</h3>
     </div>
 
-    
 
     <div id="main_holder">
       <div id="header">
@@ -102,22 +101,7 @@
           <div id="type_selector_choises">
           </div>
 
-          <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly;" >
-            <!-- <div class="card" >
-              <div>
-                <img src="https://picsum.photos/800/800" style="width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;" alt="">
-              </div>
-              <h2 style="text-align: center;" >Test name</h2>
-              <hr>
-                <div style="display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;" >
-                  <span class="material-symbols-outlined" >calendar_clock</span>
-                  <h3 style="width: max-content;" > Test date</h2>
-                </div>
-                <div style="display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;" >
-                  <span class="material-symbols-outlined" >distance</span>
-                  <h3 style="width: max-content;" > Test location</h2>
-                </div>
-            </div> -->
+          <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; overflow: hidden;" >
           </div>
 
         </div>
@@ -177,6 +161,7 @@
     
     let event_selector_open = false;
     let menu_state = "home";
+    let event_choice = "none";
     // let menu_timeline_animation = createTimeline();
 
     function reset_memeory() {
@@ -194,7 +179,7 @@
 
     let card_label_style = "display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;";
 
-    function add_cards() {
+    function add_card(event_type, offset) {
       let card = document.createElement("div");
       card.classList.add("card");
 
@@ -206,7 +191,8 @@
       image.style = "width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;";
 
       let name_label = document.createElement("h1");
-      name_label.textContent = "Test name";
+      name_label.textContent = `${event_type}`;
+      // name_label.textContent = "Test name";
       name_label.style = "text-align: center;";
 
       let date_label = document.createElement("div");
@@ -242,8 +228,39 @@
       card.append(date_label);
       card.append(location_label);
 
-      $("#cards_holder").append(card);
+      if (offset == "left"){
+        card.style.transform = "translateX(-100vw)";
+      } else if (offset == "right") {
+        card.style.transform = "translateX(100vw)";
+      }
 
+      $("#cards_holder").append(card);
+    }
+
+    function add_cards(event_type) {
+      animate(".card", {
+        translateY: "-100vh",
+        onComplete: self => {
+          $(".card").remove();
+
+          for (let i = 0; i < 4; i++) {
+            let offset = "right";
+            if (i%2 == 0){
+              offset = "left";
+            }
+          add_card(event_type, offset);
+          }
+          event_choice = "none";
+
+          animate(".card", {
+          translateX: "0vw",
+
+      });
+
+        }
+      });
+
+      
     }
 
     
@@ -340,15 +357,22 @@
       event_div.style.width = `0%`;
       event_div.addEventListener("click", function(e) {
         text_change(event_types[event_number]);
+        event_choice = event_types[event_number];
         toggle_event_selector();
-        add_cards();
-        add_cards();
-        add_cards();
       });
       
       $("#type_selector_choises").append(event_div);
 
       event_div.classList.add("even_select_buttons");
+    }
+
+    function event_select_buttons_animation_complete() {
+      if (!event_selector_open) {
+        if (event_choice != "none") {
+          console.log(event_choice)
+          add_cards(event_choice);
+        } 
+      }
     }
 
     let event_selector_animation = animate('.even_select_buttons', {
@@ -357,6 +381,7 @@
         { translateY: '0%', duration: 400, delay: stagger(100, { reversed: true }), },
         { width: '100%', duration: 400, delay: stagger(100, { reversed: false }) },
       ],
+      onComplete: self => event_select_buttons_animation_complete()
     });
 
     $("#event_selector_button").on("click", function() {
