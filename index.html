@@ -93,15 +93,29 @@
       <div id="sections_holder" >
 
         <div id="home" class="section" >
-          <div id="event_selector_button", style="height: 40px;">
-            <h3 id="event_type_label" style="margin: 0px; text-align: center;" >
-              Select Event Type
-            </h3>
+          <div id="select_holder" style="height: 100%;">
+            <div id="event_selector_button", style="height: 40px;">
+              <h3 id="event_type_label" style="margin: 0px; text-align: center;" >
+                Select Event Type
+              </h3>
+            </div>
+            <div id="type_selector_choises">
+            </div>
+  
+            <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; overflow: hidden;" >
+            </div>
           </div>
-          <div id="type_selector_choises">
-          </div>
-
-          <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; overflow: hidden;" >
+          <div id="search_holder" style="height: 100%; opacity: 0">
+            <div style="height: 40px; display: grid ; align-items: center; cursor: pointer; user-select: none; background: #000000e6;">
+              <h3 onclick="switch_to_search_animation.reverse()" style="margin: 0px; text-align: center; color: white;" >
+                Back
+              </h3>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+              <h2>searching</h2>
+              <div id="tick_holder" style="display: grid ; width: 10px; height: 10px; transform: translate(400%, -120%);" ></div>
+            </div>
+            <hr>
           </div>
 
         </div>
@@ -150,7 +164,7 @@
 
 
     </div>
-    <!-- <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p> -->
+    <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p>
   </body>
 
   <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
@@ -162,7 +176,24 @@
     let event_selector_open = false;
     let menu_state = "home";
     let event_choice = "none";
+    let continue_animation = "none";
     // let menu_timeline_animation = createTimeline();
+
+    function add_ticks() {
+      for (let i = 0; i < 10; i++) {
+        let tick = document.createElement("div");
+        tick.classList.add("tick");
+
+        $("#tick_holder").append(tick);
+      }
+    }
+
+    add_ticks();
+
+    animate(".tick", {
+      rotate: stagger(40),
+      loop: true,
+    });
 
     function reset_memeory() {
       localStorage.clear();
@@ -227,6 +258,10 @@
       card.append(name_label);
       card.append(date_label);
       card.append(location_label);
+
+      card.addEventListener("click", function(e) {
+          switch_to_search_animation.play();
+      });
 
       if (offset == "left"){
         card.style.transform = "translateX(-100vw)";
@@ -313,6 +348,11 @@
       .add("#settings_button", {width: "100%", duration: 500}, 0)
       .add("#home", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 500)
       .add("#settings", {translateX: "0%", ease: "inQuad"});
+
+    let switch_to_search_animation = createTimeline({autoplay: false})
+      .add("#select_holder", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 0)
+      .add("#search_holder", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 0)
+      .add("#search_holder", {opacity: 1, duration: 1}, 0)
     
     
 
