@@ -116,6 +116,8 @@
               <div id="tick_holder" style="display: grid ; width: 10px; height: 10px; transform: translate(400%, -120%);" ></div>
             </div>
             <hr>
+            <div id="tickets_holder" >
+            </div>
           </div>
 
         </div>
@@ -194,6 +196,55 @@
       rotate: stagger(40),
       loop: true,
     });
+
+    function add_ticket() {
+      let ticket = document.createElement("div");
+      ticket.style = "background: white; border-radius: 12px; display: flex; justify-content: space-between; margin: 3px;"
+
+        let ticket_front = document.createElement("div");
+        ticket_front.style = "display: flex ; align-items: center;";
+
+          let ticket_logo = document.createElement("img");
+          ticket_logo.src = "./ticket.svg"
+          ticket_logo.style = "width: 30px; height: 30px; margin-left: 10px;"
+
+          let ticket_price = document.createElement("h3");
+          ticket_price.style = "background: gold; border-radius: 5px; padding: 4px; margin: 4px;"
+          ticket_price.textContent = "$100";
+
+          let ticket_source = document.createElement("p");
+          ticket_source.style = "font-size: 80%;"
+          ticket_source.textContent = "buytickets.com";
+        
+        ticket_front.append(ticket_logo);
+        ticket_front.append(ticket_price);
+        ticket_front.append(ticket_source);
+
+        let ticket_back = document.createElement("div");
+
+          let ticket_buy_button = document.createElement("button");
+          ticket_buy_button.style = "margin-left: 5px; background: #416cdc; height: -webkit-fill-available; border-bottom-right-radius: 12px; border-top-right-radius: 12px;";
+          ticket_buy_button.textContent = "buy";
+        
+        ticket_back.append(ticket_buy_button);
+
+      ticket.append(ticket_front);
+      ticket.append(ticket_back);
+
+      ticket.style.transform = "translateY(100vh)";
+
+      animate(ticket, {
+        translateY: "0vh",
+        delay: 5000,
+      });
+
+      $("#tickets_holder").append(ticket);
+    }
+
+    add_ticket();
+    add_ticket();
+    add_ticket();
+    add_ticket();
 
     function reset_memeory() {
       localStorage.clear();
