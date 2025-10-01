@@ -197,9 +197,10 @@
       loop: true,
     });
 
-    function add_ticket() {
+    function add_ticket(price, ticket_delay) {
       let ticket = document.createElement("div");
       ticket.style = "background: white; border-radius: 12px; display: flex; justify-content: space-between; margin: 3px;"
+      ticket.classList.add("ticket");
 
         let ticket_front = document.createElement("div");
         ticket_front.style = "display: flex ; align-items: center;";
@@ -210,7 +211,7 @@
 
           let ticket_price = document.createElement("h3");
           ticket_price.style = "background: gold; border-radius: 5px; padding: 4px; margin: 4px;"
-          ticket_price.textContent = "$100";
+          ticket_price.textContent = `\$${price}`;
 
           let ticket_source = document.createElement("p");
           ticket_source.style = "font-size: 80%;"
@@ -235,16 +236,29 @@
 
       animate(ticket, {
         translateY: "0vh",
-        delay: 5000,
+        delay: ticket_delay,
+        // duration: "1",
+        composition: "none",
       });
 
       $("#tickets_holder").append(ticket);
     }
 
-    add_ticket();
-    add_ticket();
-    add_ticket();
-    add_ticket();
+    function add_tickets() {
+      let delay_offest = 0;
+      $(".ticket").remove();
+
+      for (let i = 0; i < (Math.floor(Math.random()*6)+4); i++) {
+        let rand_delay = Math.floor(Math.random()*1000)+500;
+        delay_offest += rand_delay;
+
+        let price = Math.floor(Math.random()*100)+40;
+
+        add_ticket(price, delay_offest);
+      }
+    }
+
+  
 
     function reset_memeory() {
       localStorage.clear();
@@ -312,6 +326,7 @@
 
       card.addEventListener("click", function(e) {
           switch_to_search_animation.play();
+          add_tickets();
       });
 
       if (offset == "left"){
