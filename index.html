@@ -197,6 +197,9 @@
       loop: true,
     });
 
+    let ticket_source_part1 = ["buy", "great", "price", "order", "all", "best"];
+    let ticket_source_end = ["com", "ca", "net", "org"]
+
     function add_ticket(price, ticket_delay) {
       let ticket = document.createElement("div");
       ticket.style = "background: white; border-radius: 12px; display: flex; justify-content: space-between; margin: 3px;"
@@ -215,7 +218,13 @@
 
           let ticket_source = document.createElement("p");
           ticket_source.style = "font-size: 80%;"
-          ticket_source.textContent = "buytickets.com";
+          let t1 = ticket_source_part1[Math.floor(Math.random()*ticket_source_part1.length)];
+          let t2 = ticket_source_end[Math.floor(Math.random()*ticket_source_end.length)];
+          if (Math.round(Math.random()) > 0){
+            ticket_source.textContent = `${t1}tickets.${t2}`;
+          } else {
+            ticket_source.textContent = `tickets${t1}.${t2}`;
+          }
         
         ticket_front.append(ticket_logo);
         ticket_front.append(ticket_price);
@@ -232,12 +241,12 @@
       ticket.append(ticket_front);
       ticket.append(ticket_back);
 
-      ticket.style.transform = "translateY(100vh)";
+      ticket.style.transform = "translateY(200vh)";
 
       animate(ticket, {
         translateY: "0vh",
         delay: ticket_delay,
-        // duration: "1",
+        duration: 1000,
         composition: "none",
       });
 
@@ -248,13 +257,21 @@
       let delay_offest = 0;
       $(".ticket").remove();
 
+      let price = Math.floor(Math.random()*100)+40;
+
       for (let i = 0; i < (Math.floor(Math.random()*6)+4); i++) {
-        let rand_delay = Math.floor(Math.random()*1000)+500;
+        let rand_delay = Math.floor(Math.random()*1500)+500;
         delay_offest += rand_delay;
 
-        let price = Math.floor(Math.random()*100)+40;
-
+        
         add_ticket(price, delay_offest);
+
+        price -= Math.floor(Math.random()*10);
+
+        if (price < 10) {
+          price = 10;
+        }
+
       }
     }
 
