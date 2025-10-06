@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <title>TicketBoost</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,8 +12,6 @@
       href="https://fonts.googleapis.com/css2?family=Aldrich&family=Orbitron:wght@400..900&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=login,distance" /> -->
-     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=distance,settings,login" /> -->
       <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -209,7 +207,7 @@
         ticket_front.style = "display: flex ; align-items: center;";
 
           let ticket_logo = document.createElement("img");
-          ticket_logo.src = "./ticket.svg"
+          ticket_logo.src = "/images/ticket.svg"
           ticket_logo.style = "width: 30px; height: 30px; margin-left: 10px;"
 
           let ticket_price = document.createElement("h3");
@@ -290,23 +288,70 @@
       reset_color_inputs();
     }
 
+    let card_types = {
+      "concerts": [
+        {name: "The Weeknd", source: "/images/weeknd.png"},
+        {name: "Ed Sheeran", source: "/images/ed_sheeran.png"},
+        {name: "Sabrina Carpenter", source: "/images/sabrina.png"},
+        {name: "Billie Eilish", source: "/images/billie.png"},
+      ],
+      "sport events": [
+        {name: "American football", source: "/images/american_football.png"},
+        {name: "Volleyball", source: "/images/volleyball.png"},
+        {name: "Baseball", source: "/images/baseball.png"},
+        {name: "Hokey", source: "/images/hockey.png"},
+      ],
+      "plays": [
+        {name: "Romeo and Juliet", source: "/images/romeo_and_juliet.png"},
+        {name: "Hamlet", source: "/images/hamlet.png"},
+        {name: "Macbeth", source: "/images/macbeth.png"},
+        {name: "A Midsummer Night's Dream", source: "/images/midsummer.png"},
+      ],
+      "movies": [
+        {name: "Despicable Me 4", source: "/images/despicable_me_4.png"},
+        {name: "American Psycho", source: "/images/american_psycho.png"},
+        {name: "War of the Worlds", source: "/images/war_of_the_worlds.png"},
+        {name: "The Dark Knight", source: "/images/the_dark_night.png"},
+      ]
+    }
+
     let card_label_style = "display: grid; grid-template-columns: auto 100%; align-items: center; justify-items: start; padding-left: 20px; padding-right: 20px;";
 
-    function add_card(event_type, offset) {
+    function add_card(count, event_type, offset) {
       let card = document.createElement("div");
+      let card_data = card_types[event_type][count];
       card.classList.add("card");
 
       let image = document.createElement("img");
-      let seed = String(Math.round(Math.random()*100));
-      let source = `https://picsum.photos/seed/${seed}/800/800`;
-      console.log(source);
-      image.src = source;
+
+      // let seed = String(Math.round(Math.random()*100));
+      // let source = `https://picsum.photos/seed/${seed}/800/800`;
+      // console.log(source);
+
+      image.src = card_data.source;
+
       image.style = "width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;";
 
       let name_label = document.createElement("h1");
-      name_label.textContent = `${event_type}`;
+      name_label.textContent = card_data.name;
+      // name_label.textContent = `${event_type}`;
       // name_label.textContent = "Test name";
       name_label.style = "text-align: center;";
+
+      let now = new Date();
+
+      let day = (1*1000*60*60*24);
+
+      let rand_day_offest = Math.floor(Math.random()*12);
+
+      let time_offset = day*rand_day_offest;
+
+      let event_date = new Date(now.getTime() + time_offset); 
+
+      let event_date_str = event_date.toDateString();
+
+      let first_space = event_date_str.indexOf(" ");
+      event_date_str = event_date_str.substring(first_space+1);
 
       let date_label = document.createElement("div");
       date_label.style = card_label_style;
@@ -317,7 +362,7 @@
       
         let data_label_text = document.createElement("h3");
         data_label_text.style = "width: max-content;";
-        data_label_text.textContent = "Test location";
+        data_label_text.textContent = event_date_str;
       
       date_label.append(data_label_icon);
       date_label.append(data_label_text);
@@ -366,7 +411,7 @@
             if (i%2 == 0){
               offset = "left";
             }
-          add_card(event_type, offset);
+            add_card(i, event_type, offset);
           }
           event_choice = "none";
 
@@ -423,13 +468,15 @@
       .add("#settings_button", {translateY: "-200%", duration: 500}, 0)
       .add("#log_in_button", {width: "100%", duration: 500}, 0)
       .add("#home", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 500)
+      .add("#home", {translateX: "-100%", ease: "inQuad", duration: 1, composition: "none"}, 1000)
       .add("#login", {translateX: "0%", ease: "inQuad"});
-    
       
-    let switch_to_settings_animation = createTimeline({autoplay: false})
+      
+      let switch_to_settings_animation = createTimeline({autoplay: false})
       .add("#log_in_button", {translateY: "-200%", duration: 500}, 0)
       .add("#settings_button", {width: "100%", duration: 500}, 0)
       .add("#home", {translateY: "-100%", ease: "inQuad", duration: 500, composition: "none"}, 500)
+      .add("#home", {translateX: "-100%", ease: "inQuad", duration: 1, composition: "none"}, 1000)
       .add("#settings", {translateX: "0%", ease: "inQuad"});
 
     let switch_to_search_animation = createTimeline({autoplay: false})
