@@ -200,7 +200,7 @@
 
     function add_ticket(price, ticket_delay) {
       let ticket = document.createElement("div");
-      ticket.style = "background: white; border-radius: 12px; display: flex; justify-content: space-between; margin: 3px;"
+      ticket.style = "background: white; border-radius: 12px; display: flex; justify-content: space-between; margin: 3px; height: min-content;"
       ticket.classList.add("ticket");
 
         let ticket_front = document.createElement("div");
@@ -231,7 +231,7 @@
         let ticket_back = document.createElement("div");
 
           let ticket_buy_button = document.createElement("button");
-          ticket_buy_button.style = "margin-left: 5px; background: #416cdc; height: -webkit-fill-available; border-bottom-right-radius: 12px; border-top-right-radius: 12px;";
+          ticket_buy_button.style = "margin-left: 5px; background: #416cdc; height: 100%; border-bottom-right-radius: 12px; border-top-right-radius: 12px;";
           ticket_buy_button.textContent = "buy";
         
         ticket_back.append(ticket_buy_button);
