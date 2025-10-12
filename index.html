@@ -367,6 +367,8 @@
 
     let card_label_style = "display: flex; justify-content: center; margin: 10px";
 
+    let locations = ["Toronto", "Ottawa", "Vancouver", "Québec", "Winnipeg"];
+
     function add_card(count, event_type, offset) {
       let card = document.createElement("div");
       let card_data = card_types[event_type][count];
@@ -420,7 +422,7 @@
       
         let location_label_text = document.createElement("h3");
         location_label_text.style = "width: max-content;";
-        location_label_text.textContent = "Test location";
+        location_label_text.textContent = locations[Math.floor(Math.random()*locations.length)];
       
       location_label.append(location_label_icon);
       location_label.append(location_label_text);
