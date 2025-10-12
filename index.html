@@ -203,7 +203,7 @@
           >PAY</button>
       </div>
     </div> 
-    <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p>
+    <a href="https://github.com/0leg0602/TicketBoost" style="position: absolute; bottom: 10px; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</a>
   </body>
 
   <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
@@ -216,7 +216,6 @@
     let menu_state = "home";
     let event_choice = "none";
     let continue_animation = "none";
-    // let menu_timeline_animation = createTimeline();
 
     function add_ticks() {
       for (let i = 0; i < 10; i++) {
@@ -375,18 +374,12 @@
 
       let image = document.createElement("img");
 
-      // let seed = String(Math.round(Math.random()*100));
-      // let source = `https://picsum.photos/seed/${seed}/800/800`;
-      // console.log(source);
-
       image.src = card_data.source;
 
       image.style = "width: 100%; border-top-left-radius: 12px; border-top-right-radius: 12px;";
 
       let name_label = document.createElement("h1");
       name_label.textContent = card_data.name;
-      // name_label.textContent = `${event_type}`;
-      // name_label.textContent = "Test name";
       name_label.style = "text-align: center;";
 
       let now = new Date();
@@ -565,7 +558,6 @@
       });
     }
 
-    // let event_types = ["concerts"];
     let event_types = ["concerts", "sport events", "plays", "movies"];
 
     for (let event_number in event_types) {
@@ -591,7 +583,6 @@
     function event_select_buttons_animation_complete() {
       if (!event_selector_open) {
         if (event_choice != "none") {
-          console.log(event_choice)
           add_cards(event_choice);
         } 
       }
