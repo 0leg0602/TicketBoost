@@ -155,15 +155,54 @@
               <h1>Password</h1>
               <input type="password" style="font-size: large;" >
             </div>
-            <button id="submit_button" onclick="spin_button()" >Log in</button>
+            <button style="transform: rotate(0deg);" id="submit_button" onclick="spin_button()" >Log in</button>
           </div>
         </div>
       </div>
 
       
-
-
+      
     </div>
+
+    <div id="pay_window" style="
+      background: rgb(0 0 0 / 32%);
+      color: white;
+      border-radius: 12px;
+      box-shadow: 0px 0px 13px 1px #313131;
+      margin: auto;
+      position: fixed;
+      inset: 0px;
+      width: max-content;
+      height: max-content;
+      backdrop-filter: blur(5px);
+      transform: translateX(-100vw);
+      padding: 20px;" > 
+      <div style="display: flex; align-items: center;" >
+        <span id="pay_close" style="position: fixed; right: 0px; top: 0px; cursor: pointer;" class="material-symbols-outlined">close</span>
+
+        <span style="font-size: xx-large;" class="material-symbols-outlined">credit_card</span> <h3>Pay with card</h3>
+      </div>
+      <hr>
+      <div>
+        <p>Card Number</p>
+        <input type="text">
+      </div>
+      <div style="display: flex; flex-direction: column;" >
+        <p>Expiration Date</p>
+        <input type="date">
+        <p>CVV</p>
+        <input type="number">
+        <button id="pay_button" style="
+          margin-top: 20px;
+          background: gold;
+          color: black;
+          font-size: x-large;
+          border-radius: 5px;
+          transform: rotate(0deg);" 
+          
+          >PAY</button>
+      </div>
+    </div> 
     <p style="position: absolute; bottom: 0; left: 20px; color: rgba(255, 255, 255, 0.548);" >Made By Oleg</p>
   </body>
 
@@ -193,6 +232,15 @@
     animate(".tick", {
       rotate: stagger(40),
       loop: true,
+    });
+
+    document.getElementById("pay_button").addEventListener("click", function() {
+      animate("#pay_button", {
+        rotate: `${parseInt(document.getElementById("pay_button").style.transform.match("\\((.*)d")[1])+360}`,
+      });
+    });
+    document.getElementById("pay_close").addEventListener("click", function() {
+      show_pay_window_animation.reverse();
     });
 
     let ticket_source_part1 = ["buy", "great", "price", "order", "all", "best"];
@@ -233,6 +281,9 @@
           let ticket_buy_button = document.createElement("button");
           ticket_buy_button.style = "margin-left: 5px; background: #416cdc; height: 100%; border-bottom-right-radius: 12px; border-top-right-radius: 12px;";
           ticket_buy_button.textContent = "buy";
+          ticket_buy_button.addEventListener("click", function(){
+            show_pay_window_animation.play();
+          });
         
         ticket_back.append(ticket_buy_button);
 
@@ -461,7 +512,9 @@
     }
 
     
-
+    let show_pay_window_animation = createTimeline({autoplay: false})
+    .add("#pay_window", {translateX: "0vw", duration: 500}, 0);
+    
     
 
     let switch_to_login_animation = createTimeline({autoplay: false})
@@ -508,8 +561,7 @@
 
     function spin_button(){
       animate("#submit_button", {
-        rotate: "360deg",
-        onComplete: self => self.revert(),
+        rotate: `${parseInt(document.getElementById("submit_button").style.transform.match("\\((.*)d")[1])+360}`,
       });
     }
 
