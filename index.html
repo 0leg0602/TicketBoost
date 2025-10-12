@@ -100,7 +100,7 @@
             <div id="type_selector_choises">
             </div>
   
-            <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; overflow: hidden;" >
+            <div id="cards_holder" style="display: flex ; justify-items: center; font-size: 50%; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly; overflow: hidden; font-size: var(--cards_size);" >
             </div>
           </div>
           <div id="search_holder" style="height: 100%; opacity: 0">
@@ -137,6 +137,34 @@
                <tr>
                 <td>Custom colors: </td>
                 <td><button onclick="reset_colors()" style="color: black; width: 100%;" >reset</button></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <br>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Cards size: </td>
+                <td>
+                   <div style="display: flex;" >
+                     <button id="cards_size_minus" style="color: black; width: 100%;" >-</button>
+                     <button id="cards_size_display" style="color: black; width: 100%; border-right: 1px solid black; border-left: 1px solid black;" >1.2</button>
+                     <button id="cards_size_plus" style="color: black; width: 100%;" >+</button>
+                   </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Custom cards size: </td>
+                <td><button onclick="change_cards_size()" style="color: black; width: 100%;" >reset</button></td>
+              </tr>
+
+              <tr>
+                <td>
+                  <br>
+                </td>
               </tr>
 
                <tr>
@@ -209,6 +237,21 @@
   <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>
 
   <script>
+
+    function set_default_cards_size(){
+      let stored_cards_size = localStorage.getItem(`cards_size`);
+      let current_cards_size = 0;
+      if (stored_cards_size != undefined){
+        document.documentElement.style.setProperty(`--cards_size`, `${stored_cards_size}vmax`);
+        current_cards_size = stored_cards_size;
+      } else {
+        document.documentElement.style.setProperty(`--cards_size`, `1.2vmax`);
+        current_cards_size = "1.2";
+      }
+      document.getElementById("cards_size_display").textContent = current_cards_size;
+    }
+
+    set_default_cards_size();
 
     const { animate, stagger, createTimeline, text } = anime;
     
@@ -328,6 +371,7 @@
     function reset_memeory() {
       localStorage.clear();
       reset_colors();
+      change_cards_size();
     }
 
     function reset_colors() {
@@ -365,7 +409,7 @@
       ]
     }
 
-    let card_label_style = "display: flex; justify-content: center; margin: 10px";
+    let card_label_style = "display: flex; justify-content: center; align-items: center; margin: 10px";
 
     let locations = ["Toronto", "Ottawa", "Vancouver", "Québec", "Winnipeg"];
 
@@ -404,6 +448,7 @@
 
         let data_label_icon = document.createElement("span");
         data_label_icon.classList.add("material-symbols-outlined");
+        data_label_icon.style = "font-size: 2vmax;";
         data_label_icon.textContent = "calendar_clock";
       
         let data_label_text = document.createElement("h3");
@@ -628,6 +673,31 @@
         document.getElementById(`color${i}_input`).addEventListener("change", function(e) {
             localStorage.setItem(`color${i}`, document.getElementById(`color${i}_input`).value);
         });
+    }
+
+    document.getElementById("cards_size_plus").addEventListener("click", function() {
+      change_cards_size(+0.1);
+    });
+
+    document.getElementById("cards_size_minus").addEventListener("click", function() {
+      change_cards_size(-0.1);
+    });
+
+    document.getElementById("cards_size_display").addEventListener("click", function() {
+      change_cards_size();
+    });
+
+    function change_cards_size(change) {
+      let current_cards_size = parseFloat(document.documentElement.style.getPropertyValue(`--cards_size`).match("(.*)vmax")[1]);
+      if (change == undefined){
+        current_cards_size = 1.2;
+      } else {
+        current_cards_size += change;
+      }
+      current_cards_size = current_cards_size.toFixed(1);
+      document.documentElement.style.setProperty(`--cards_size`, `${current_cards_size}vmax`);
+      localStorage.setItem("cards_size", current_cards_size);
+      document.getElementById("cards_size_display").textContent = current_cards_size;
     }
     
   </script>
